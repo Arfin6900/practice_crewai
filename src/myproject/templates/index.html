@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">AI Blog Generator</h1>
+            <p class="text-gray-600">Powered by CrewAI</p>
+        </header>
+
+        <div class="max-w-3xl mx-auto">
+            <!-- Generate Button -->
+            <div class="text-center mb-8">
+                <button onclick="generateBlog()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300">
+                    Generate New Blog
+                </button>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loading" class="hidden">
+                <div class="flex justify-center items-center mb-8">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+                </div>
+                <p class="text-center text-gray-600">Generating content...</p>
+            </div>
+
+            <!-- Content Section -->
+            <div id="content" class="bg-white rounded-lg shadow-md p-8 mb-8 hidden">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Topic</h2>
+                    <div id="topic" class="text-gray-700 prose"></div>
+                </div>
+                
+                <div>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Outline</h2>
+                    <div id="outline" class="text-gray-700 prose whitespace-pre-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function generateBlog() {
+            const loadingDiv = document.getElementById('loading');
+            const contentDiv = document.getElementById('content');
+            const topicDiv = document.getElementById('topic');
+            const outlineDiv = document.getElementById('outline');
+
+            // Show loading, hide content
+            loadingDiv.classList.remove('hidden');
+            contentDiv.classList.add('hidden');
+
+            try {
+                const response = await fetch('/run-crew');
+                const data = await response.json();
+                
+                // Hide loading, show content
+                loadingDiv.classList.add('hidden');
+                contentDiv.classList.remove('hidden');
+
+                // Update content
+                topicDiv.textContent = data.result.topic;
+                outlineDiv.textContent = data.result.outline;
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while generating the blog content.');
+                loadingDiv.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

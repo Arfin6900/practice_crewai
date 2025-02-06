@@ -1,0 +1,19 @@
+[project]
+name = "practice_crewai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "crewai",
+    "fastapi",
+    "uvicorn",
+    "google-generativeai>=0.3.2",
+    "beautifulsoup4>=4.12.3",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "duckduckgo-search>=4.2.0",
+    "newspaper3k>=0.2.8",
+    "litellm>=1.59.8",
+    "jinja2>=3.1.5",
+]

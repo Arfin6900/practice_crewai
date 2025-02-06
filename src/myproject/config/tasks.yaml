@@ -1,0 +1,10 @@
+research_task:
+  description: "Research the topic {topic} and extract 10 key bullet points."
+  expected_output: "A list of 10 bullet points summarizing {topic}."
+  agent: "researcher"
+
+reporting_task:
+  description: "Generate a detailed markdown report from the research on {topic}."
+  expected_output: "A full markdown report with sections for each key point."
+  agent: "reporting_analyst"
+  output_file: "output/report.md"
