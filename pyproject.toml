@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "crewai",
+    "crewai[tools]",
     "fastapi",
     "uvicorn",
     "google-generativeai>=0.3.2",
@@ -16,4 +16,6 @@ dependencies = [
     "newspaper3k>=0.2.8",
     "litellm>=1.59.8",
     "jinja2>=3.1.5",
+    "motor>=3.7.0",
+    "pydantic[dotenv]>=2.10.6",
 ]

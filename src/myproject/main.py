@@ -1,15 +1,18 @@
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
+from .api.v1.endpoints.todo import router as todo_router
 from .crew import run_crew
 
-app = FastAPI()
+app = FastAPI(title="Todo and Crew AI API")
 
 # Set up templates
 templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 
-@app.get("/", response_class=HTMLResponse)
+# Include routers
+app.include_router(todo_router)
+
+@app.get("/")
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
